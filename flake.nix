@@ -38,7 +38,7 @@
 
   outputs = inputs@{ nixpkgs, ... }: {
     nixosConfigurations = {
-      nixy =
+      tuhoiisa-pc =
         # CHANGEME: This should match the 'hostname' in your variables.nix file
         nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -47,23 +47,9 @@
               nixpkgs.overlays = [ inputs.hyprpanel.overlay ];
               _module.args = { inherit inputs; };
             }
-            inputs.nixos-hardware.nixosModules.omen-16-n0005ne # CHANGEME: check https://github.com/NixOS/nixos-hardware
             inputs.home-manager.nixosModules.home-manager
             inputs.stylix.nixosModules.stylix
-            ./hosts/laptop/configuration.nix # CHANGEME: change the path to match your host folder
-          ];
-        };
-      # Jack is my server
-      jack = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          { _module.args = { inherit inputs; }; }
-          inputs.home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.sops-nix.nixosModules.sops
-          inputs.nixarr.nixosModules.default
-          inputs.search-nixos-api.nixosModules.search-nixos-api
-          ./hosts/server/configuration.nix
+            ./hosts/tuhoiisa-pc/configuration.nix # CHANGEME: change the path to match your host folder
         ];
       };
     };
